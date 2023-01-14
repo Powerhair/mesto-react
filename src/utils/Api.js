@@ -13,15 +13,17 @@ class Api {
   }
 
   getUserInfo() {
-    return fetch(`${this._url}users/me`, { headers: this._headers }).then(
-      this._checkRequest
-    );
+    return fetch(`${this._url}users/me`, {
+      method: 'GET',
+      headers: this._headers,
+    }).then(this._checkRequest);
   }
 
   getInitialCards() {
-    return fetch(`${this._url}cards`, { headers: this._headers }).then(
-      this._checkRequest
-    );
+    return fetch(`${this._url}cards`, {
+      method: 'GET',
+      headers: this._headers,
+    }).then(this._checkRequest);
   }
 
   getData() {
@@ -32,26 +34,23 @@ class Api {
     return fetch(`${this._url}users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify({ avatar }),
+      body: JSON.stringify(avatar),
     }).then(this._checkRequest);
   }
 
-  setUserInfo(name, about) {
+  setUserInfo(data) {
     return fetch(`${this._url}users/me`, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify({ name, about }),
+      body: JSON.stringify(data),
     }).then(this._checkRequest);
   }
 
-  postUserCard(post) {
+  postUserCard(data) {
     return fetch(`${this._url}cards`, {
       method: 'POST',
       headers: this._headers,
-      body: JSON.stringify({
-        link: post.linkInput,
-        name: post.titleInput,
-      }),
+      body: JSON.stringify(data),
     }).then(this._checkRequest);
   }
 
